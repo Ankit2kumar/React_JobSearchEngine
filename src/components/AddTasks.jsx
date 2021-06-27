@@ -7,8 +7,8 @@ import {
 	Container,
 	Row,
 	Col,
-	Alert,
 } from 'react-bootstrap';
+import ShowTasks from './ShowTasks';
 
 class AddTasks extends Component {
 	state = {
@@ -17,6 +17,7 @@ class AddTasks extends Component {
 	};
 
 	takeValues = (e) => {
+		e.preventDefault();
 		this.setState({ singleTask: e.target.value });
 	};
 
@@ -46,12 +47,8 @@ class AddTasks extends Component {
 							</Button>
 						</Col>
 					</Row>
-					<Row className="mt-5">
-						{this.state.Task.map((task, id) => (
-							<Alert key={id} variant="warning">
-								{task}
-							</Alert>
-						))}
+					<Row>
+						<ShowTasks tasksList={this.state.Task} />
 					</Row>
 				</Container>
 			</>
