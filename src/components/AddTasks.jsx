@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import '../styles/Add.css';
 import {
+	Alert,
 	Form,
 	FormControl,
 	Button,
@@ -9,6 +10,7 @@ import {
 	Col,
 } from 'react-bootstrap';
 import ShowTasks from './ShowTasks';
+import uniqid from 'uniqid';
 
 class AddTasks extends Component {
 	state = {
@@ -25,6 +27,12 @@ class AddTasks extends Component {
 		this.setState({
 			Task: [...this.state.Task, this.state.singleTask],
 		});
+	};
+
+	deleteItem = (index) => {
+		const newTasks = this.state.Task.filter((t, i) => i !== index);
+
+		this.setState({ Task: newTasks });
 	};
 
 	render() {
@@ -48,7 +56,10 @@ class AddTasks extends Component {
 						</Col>
 					</Row>
 					<Row>
-						<ShowTasks tasksList={this.state.Task} />
+						<ShowTasks
+							tasksList={this.state.Task}
+							deleteItem={this.deleteItem}
+						/>
 					</Row>
 				</Container>
 			</>
